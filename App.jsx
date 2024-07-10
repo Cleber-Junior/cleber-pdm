@@ -1,25 +1,21 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import MyButton from './src/components/MyButton';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Home from './src/screens/Home';
+import SignIn from './src/screens/SignIn';
+import SignUp from './src/screens/SignUp';
 
-function App() {
-  const contar = () => {
-    alert('clicou');
-  };
+const Stack = createNativeStackNavigator();
 
+const App = () => {
   return (
-    <View>
-      <Text style={styles.texto}>Olá Mundo</Text>
-      <MyButton texto="Salvar" onClick={contar} />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="SignIn">
+        <Stack.Screen name="SignIn" component={SignIn} />
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
-
-const styles = StyleSheet.create({
-  texto: {
-    fontSize: 24,
-    color: '#ff0000',
-  },
-});
-
+};
 export default App;
