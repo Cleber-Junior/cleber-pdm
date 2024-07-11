@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text, StyleSheet, TouchableHighlight} from 'react-native';
+import {Colors} from '../assets/images/colors';
 
 const MyButton = props => {
   return (
@@ -13,14 +14,18 @@ export default MyButton;
 
 const styles = StyleSheet.create({
   texto: {
-    fontSize: 24,
-    color: '#ff0000',
+    fontSize: 25,
+    color: '#FFF',
+    textAlign: 'center',
   },
   button: {
-    backgroundColor: '#00ff44',
+    backgroundColor: Colors.primary,
+    textAlign: 'center',
     padding: 10,
     margin: 10,
     borderRadius: 5,
-    alignItems: 'center',
+    width: 250,
+    height: 50,
+    marginTop: 30,
   },
 });
