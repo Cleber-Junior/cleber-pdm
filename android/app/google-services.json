@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "1020501065621",
-    "project_id": "cleber-pdm",
-    "storage_bucket": "cleber-pdm.appspot.com"
+    "project_number": "66111758868",
+    "project_id": "cleber-pdm-e4781",
+    "storage_bucket": "cleber-pdm-e4781.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1020501065621:android:3027f9614301c7b035009c",
+        "mobilesdk_app_id": "1:66111758868:android:bbe65bb28c8059f5a3bd01",
         "android_client_info": {
           "package_name": "com.cleber__pdm"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBUs4EEVKWK-t7Fbk-C3TpWiL-o35eHuJ4"
+          "current_key": "AIzaSyAlg2VAnGjgTbVuYolq1nd7udQ222NQjyo"
         }
       ],
       "services": {
