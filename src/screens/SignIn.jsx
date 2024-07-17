@@ -20,54 +20,44 @@ const SignIn = ({navigation}) => {
   const [pass, setPass] = React.useState('');
 
   const recuperaSenha = () => {
-    navigation.dispatch(
-      CommonActions.navigate({
-        name: 'Recuperar Senha',
-      }),
-    );
+    navigation.navigate('ForgotPassword');
   };
 
   const cadastrarSe = () => {
     navigation.dispatch(
       CommonActions.reset({
-        index: 1,
+        index: 0,
         routes: [{name: 'Cadastrar-se'}],
       }),
     );
   };
 
-  const login = () => {
-    auth()
-      .signInWithEmailAndPassword(email, pass)
-      .then(() => {
-        navigation.dispatch(
-          CommonActions.reset({
-            index: 0,
-            routes: [{name: 'Home'}],
-          }),
-        );
-      })
-      .catch(e => {
-        console.log('SignIn ' + e);
-        switch (e.code) {
-          case 'auth/user-not-found': //Usuário não encontrado não esta alertando
-            Alert.alert('Usuário não encontrado', 'Deseja criar uma conta?');
-            break;
-          case 'auth/wrong-password': //Senha não está alertando
-            Alert.alert('Senha incorreta', 'Digite a senha correta');
-            console.log('Senha incorreta');
-            break;
-          case 'auth/invalid-email':
-            Alert.alert('E-mail inválido', 'Digite um e-mail válido');
-            break;
-          case 'auth/user-disabled':
-            Alert.alert(
-              'Usuário desabilitado',
-              'Entre em contato com o suporte',
-            );
-            break;
-        }
-      });
+  const login = (email, pass) => {
+    if (email !== '' && pass !== '') {
+      auth()
+        .signInWithEmailAndPassword(email, pass)
+        .then(() => {
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [{name: 'Home'}],
+            }),
+          );
+        })
+        .catch(e => {
+          console.log('SignIn ' + e);
+          switch (e.code) {
+            case 'auth/invalid-email':
+            case 'auth/invalid-credential':
+            case 'auth/invalid-password':
+              Alert.alert('Erro', 'E-mail ou senha inválidos');
+              break;
+          }
+        });
+    } else {
+      Alert.alert('Erro', 'Preencha todos os campos');
+      return;
+    }
   };
 
   return (
@@ -81,12 +71,13 @@ const SignIn = ({navigation}) => {
           />
           <TextInput
             style={styles.input}
-            // inlineImageLeft="../assets/icon/email_icon.png"
-            placeholder="E-mail"
+            placeholder="Email"
             keyboardType="email-address"
             returnKeyType="next"
             onChangeText={t => setEmail(t)}
-            onEndEditing={() => this.passTextInput.focus()}
+            // onEndEditing={() => this.passTextInput.focus()}
+            onSubmitEditing={() => this.passTextInput.focus()}
+            blurOnSubmit={false}
           />
           <TextInput
             ref={ref => {
@@ -154,7 +145,7 @@ const styles = StyleSheet.create({
   input: {
     width: 200,
     height: 50,
-    color: Colors.Black,
+    color: Colors.white,
     borderBottomColor: Colors.Black,
     borderBottomWidth: 1,
     fontSize: 20,

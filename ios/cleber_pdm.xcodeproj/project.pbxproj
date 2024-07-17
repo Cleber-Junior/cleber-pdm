@@ -14,6 +14,9 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-cleber_pdm-cleber_pdmTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-cleber_pdm-cleber_pdmTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		ABF9C3CAE428482D84367FD6 /* colors.jsx in Resources */ = {isa = PBXBuildFile; fileRef = 61616E3F46894E05B9BEC89D /* colors.jsx */; };
+		ACC9673824E942E095C1ABBE /* LogoLigth.png in Resources */ = {isa = PBXBuildFile; fileRef = C3D013760C134AE0A760E16B /* LogoLigth.png */; };
+		2E63416EAC1F4155ACF86287 /* SignUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 35C057408BEB42378B59ED2A /* SignUp.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,9 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = cleber_pdm/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-cleber_pdm-cleber_pdmTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleber_pdm-cleber_pdmTests.release.xcconfig"; path = "Target Support Files/Pods-cleber_pdm-cleber_pdmTests/Pods-cleber_pdm-cleber_pdmTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		61616E3F46894E05B9BEC89D /* colors.jsx */ = {isa = PBXFileReference; name = "colors.jsx"; path = "../src/assets/images/colors.jsx"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C3D013760C134AE0A760E16B /* LogoLigth.png */ = {isa = PBXFileReference; name = "LogoLigth.png"; path = "../src/assets/images/LogoLigth.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		35C057408BEB42378B59ED2A /* SignUp.png */ = {isa = PBXFileReference; name = "SignUp.png"; path = "../src/assets/images/SignUp.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +128,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				34F74A31140F41BCBE0224EB /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -147,6 +154,17 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		34F74A31140F41BCBE0224EB /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				61616E3F46894E05B9BEC89D /* colors.jsx */,
+				C3D013760C134AE0A760E16B /* LogoLigth.png */,
+				35C057408BEB42378B59ED2A /* SignUp.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -243,6 +261,9 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				ABF9C3CAE428482D84367FD6 /* colors.jsx in Resources */,
+				ACC9673824E942E095C1ABBE /* LogoLigth.png in Resources */,
+				2E63416EAC1F4155ACF86287 /* SignUp.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
