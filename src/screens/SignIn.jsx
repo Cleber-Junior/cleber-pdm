@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   SafeAreaView,
@@ -14,13 +14,40 @@ import MyButton from '../components/MyButton';
 import {Colors} from '../assets/images/colors';
 import app from '@react-native-firebase/app';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {collection} from '@react-native-firebase/firestore';
 
 const SignIn = ({navigation}) => {
-  const [email, setEmail] = React.useState('');
-  const [pass, setPass] = React.useState('');
+  const [email, setEmail] = useState('');
+  const [pass, setPass] = useState('');
 
   const recuperaSenha = () => {
-    navigation.navigate('ForgotPassword');
+    navigation.navigate('Recuperar senhas');
+  };
+
+  const storageUserCache = async value => {
+    try {
+      value.pass = pass;
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem('user', jsonValue);
+    } catch (e) {
+      console.log('SignIn: Erro em getUser: ' + e);
+    }
+  };
+
+  const getUser = () => {
+    firestore()
+      .collection('users')
+      .doc(auth().currentUser.uid)
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          storageUserCache(doc.data());
+        } else {
+          console.log('No such document');
+        }
+      });
   };
 
   const cadastrarSe = () => {
@@ -32,7 +59,7 @@ const SignIn = ({navigation}) => {
     );
   };
 
-  const login = (email, pass) => {
+  const login = () => {
     if (email !== '' && pass !== '') {
       auth()
         .signInWithEmailAndPassword(email, pass)
@@ -54,6 +81,7 @@ const SignIn = ({navigation}) => {
               break;
           }
         });
+      console.log(email, pass);
     } else {
       Alert.alert('Erro', 'Preencha todos os campos');
       return;
@@ -70,12 +98,12 @@ const SignIn = ({navigation}) => {
             accessibilityLabel="Logo do App"
           />
           <TextInput
+            value={email}
             style={styles.input}
             placeholder="Email"
             keyboardType="email-address"
             returnKeyType="next"
             onChangeText={t => setEmail(t)}
-            // onEndEditing={() => this.passTextInput.focus()}
             onSubmitEditing={() => this.passTextInput.focus()}
             blurOnSubmit={false}
           />
@@ -84,6 +112,7 @@ const SignIn = ({navigation}) => {
               this.passTextInput = ref;
             }}
             style={styles.input}
+            value={pass}
             secureTextEntry={true}
             placeholder="Senha"
             keyboardType="default"
@@ -134,12 +163,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     fontSize: 20,
-    paddingTop: 170,
+    paddingTop: 150,
   },
 
   LogoFullName: {
     width: 350,
     height: 125,
+    marginTop: 50,
   },
 
   input: {

@@ -1,18 +1,78 @@
 import React from 'react';
-import {View, Text, ScrollView, Image, TextInput} from 'react-native';
+import {View, Text, ScrollView, Image, TextInput, Alert} from 'react-native';
 import {CommonActions} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {Colors} from '../assets/images/colors';
-import MyButton from '../components/MyButton';
+import {Colors} from '../../assets/images/colors';
+import MyButton from '../../components/MyButton';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 const SignUp = ({navigation}) => {
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
-  const [phone, setPhone] = React.useState('');
+  const [confPass, setConfPass] = React.useState('');
   const [pass, setPass] = React.useState('');
 
   const Cadastra = () => {
-    console.log('Cadastro');
+    if (name !== '' || email !== '' || confPass !== '' || pass !== '') {
+      if (pass !== confPass) {
+        Alert.alert('Erro', 'Senhas não conferem');
+        return;
+      }
+      auth()
+        .createUserWithEmailAndPassword(email, pass)
+        .then(r => {
+          let userf = auth().currentUser;
+          let User = {};
+          User.name = name;
+          User.email = email;
+          firestore()
+            .collection('users')
+            .doc(userf.uid)
+            .set(User)
+            .then(() => {
+              console.log('Usuário adicionado!');
+              userf.sendEmailVerification().then(() => {
+                Alert.alert(
+                  'Email enviado',
+                  'Email foi enviado para: ' + email + ' para verificação',
+                );
+                navigation.reset({
+                  index: 0,
+                  routes: [{name: 'Login'}],
+                });
+              });
+            })
+            .catch(e => {
+              console.log('Erro: ', e);
+            });
+          Alert.alert('Sucesso', 'Cadastro efetuado com sucesso');
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [{name: 'Login'}],
+            }),
+          );
+        })
+        .catch(e => {
+          console.log('Erro: ', e);
+          Alert.alert('Erro', 'Email não encontrado');
+          switch (e.code) {
+            case 'auth/email-already-in-use':
+              Alert.alert('Erro', 'Email já cadastrado');
+              break;
+            case 'auth/invalid-email':
+              Alert.alert('Erro', 'E-mail inválido');
+              break;
+            case 'auth/invalid-credential':
+              Alert.alert('Erro', 'Credencial inválida');
+              break;
+          }
+        });
+    } else {
+      Alert.alert('Erro', 'Preencha todos os campos');
+      return;
+    }
   };
 
   const SignIn = () => {
@@ -33,7 +93,7 @@ const SignUp = ({navigation}) => {
         <View style={Styles.divSuperior}>
           <View style={Styles.userForm}>
             <Image
-              source={require('../assets/icons/user.png')}
+              source={require('../../assets/icons/user.png')}
               style={{marginRight: 5, marginBottom: 5}}
             />
             <TextInput
@@ -49,7 +109,7 @@ const SignUp = ({navigation}) => {
           </View>
           <View style={Styles.emailForm}>
             <Image
-              source={require('../assets/icons/email.png')}
+              source={require('../../assets/icons/email.png')}
               style={{marginRight: 5, marginBottom: 5}}
             />
             <TextInput
@@ -66,34 +126,34 @@ const SignUp = ({navigation}) => {
           </View>
           <View style={Styles.phoneForm}>
             <Image
-              source={require('../assets/icons/phone.png')}
-              style={{marginRight: 5, marginBottom: 5}}
-            />
-            <TextInput
-              ref={input => (this.phoneInput = input)}
-              style={Styles.input}
-              placeholder="Celular"
-              placeholderTextColor={Colors.darkGreen}
-              keyboardType="phone-pad"
-              returnKeyType="next"
-              onChangeText={t => setPhone(t)}
-              onSubmitEditing={() => this.passwordInput.focus()}
-              blurOnSubmit={false}
-            />
-          </View>
-          <View style={Styles.passForm}>
-            <Image
-              source={require('../assets/icons/pass.png')}
+              source={require('../../assets/icons/pass.png')}
               style={{marginRight: 5, marginBottom: 5}}
             />
             <TextInput
               ref={input => (this.passwordInput = input)}
               style={Styles.input}
+              secureTextEntry={true}
               placeholder="Senha"
               placeholderTextColor={Colors.darkGreen}
               keyboardType="default"
               returnKeyType="go"
               onChangeText={t => setPass(t)}
+            />
+          </View>
+          <View style={Styles.passForm}>
+            <Image
+              source={require('../../assets/icons/pass.png')}
+              style={{marginRight: 5, marginBottom: 5}}
+            />
+            <TextInput
+              ref={input => (this.passwordInput = input)}
+              style={Styles.input}
+              secureTextEntry={true}
+              placeholder="Confirmar Senha"
+              placeholderTextColor={Colors.darkGreen}
+              keyboardType="default"
+              returnKeyType="go"
+              onChangeText={t => setConfPass(t)}
             />
           </View>
 
@@ -175,6 +235,7 @@ const Styles = {
     height: 50,
     padding: 10,
     marginBottom: 10,
+    color: Colors.Black,
     backgroundColor: Colors.white,
     borderRadius: 5,
   },

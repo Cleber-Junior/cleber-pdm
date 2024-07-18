@@ -1,32 +1,37 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import MyButton from '../components/MyButton';
+import {Colors} from '../assets/images/colors';
+import LogoutButton from '../components/LogoutButton';
 
-function Home(props) {
-  const [contador, setContador] = useState(0);
+const Home = ({navigation}) => {
+  useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => false,
+      title: 'Usuário',
+      headerStyle: {backgroundColor: Colors.primary},
+      headerTitleStyle: {color: Colors.white},
+      headerRigth: <LogoutButton />,
+    });
+  }, []);
 
-  // useEffect(() => {
-  //   console.log('Montou os componentes');
-  // }, []);
-
-  const Contar = () => {
-    setContador(contador + 1);
-  };
-  const Zerar = () => {
-    setContador(0);
-  };
+  console.log(LogoutButton);
 
   return (
-    <View>
-      <Text style={styles.texto}>Olá Mundo</Text>
-      <Text style={styles.texto}>Contador: {contador}</Text>
-      <MyButton texto="Contar" onClick={Contar} />
-      <MyButton texto="Zerar" onClick={Zerar} />
+    <View style={styles.container}>
+      <LogoutButton />
+      <Text style={styles.texto}>Home</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.grey,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
   texto: {
     fontSize: 24,
     color: '#ff0000',

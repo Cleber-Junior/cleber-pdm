@@ -3,10 +3,12 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './src/screens/Home';
 import SignIn from './src/screens/SignIn';
-import SignUp from './src/screens/SignUp';
+import SignUp from './src/screens/SignUp/SignUp';
+import Preload from './src/screens/Preload';
 import {StatusBar} from 'react-native';
 import {Colors} from './src/assets/images/colors';
 import ForgotPass from './src/screens/ForgotPass';
+import {Header} from '@rneui/base';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,16 +16,25 @@ const App = () => {
   return (
     <NavigationContainer>
       <StatusBar backgroundColor={Colors.darkGreen} />
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator
+        initialRouteName="Preload"
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <Stack.Screen
+          name="Preload"
+          component={Preload}
+          options={PreloadStyle}
+        />
         <Stack.Screen name="Login" component={SignIn} options={SignInStyle} />
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Home" component={Home} options={HomeStyle} />
         <Stack.Screen
           name="Cadastrar-se"
           component={SignUp}
           options={SingnUpStyle}
         />
         <Stack.Screen
-          name="ForgotPassword"
+          name="Recuperar senhas"
           component={ForgotPass}
           options={forgotPass}
         />
@@ -32,6 +43,15 @@ const App = () => {
   );
 };
 export default App;
+
+const HomeStyle = {
+  headerShown: true,
+  headerStyle: {backgroundColor: Colors.primary},
+};
+
+const PreloadStyle = {
+  headerShown: false,
+};
 
 const SignInStyle = {
   headerLeaft: false,
