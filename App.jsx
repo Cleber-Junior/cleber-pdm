@@ -26,15 +26,11 @@ const App = () => {
           component={Preload}
           options={PreloadStyle}
         />
-        <Stack.Screen name="Login" component={SignIn} options={SignInStyle} />
+        <Stack.Screen name="SignIn" component={SignIn} options={SignInStyle} />
         <Stack.Screen name="Home" component={Home} options={HomeStyle} />
+        <Stack.Screen name="SignUp" component={SignUp} options={SingnUpStyle} />
         <Stack.Screen
-          name="Cadastrar-se"
-          component={SignUp}
-          options={SingnUpStyle}
-        />
-        <Stack.Screen
-          name="Recuperar senhas"
+          name="ForgotPass"
           component={ForgotPass}
           options={forgotPass}
         />
@@ -45,7 +41,8 @@ const App = () => {
 export default App;
 
 const HomeStyle = {
-  headerShown: true,
+  headerStyle: {backgroundColor: Colors.primary},
+  headerTitleStyle: {color: Colors.white},
   headerStyle: {backgroundColor: Colors.primary},
 };
 
@@ -54,18 +51,21 @@ const PreloadStyle = {
 };
 
 const SignInStyle = {
+  tittle: 'Login',
   headerLeaft: false,
   headerStyle: {backgroundColor: Colors.primary},
   headerTitleStyle: {color: Colors.white},
 };
 
 const forgotPass = {
+  tittle: 'Esqueci minha senha',
   headerLeaft: false,
   headerStyle: {backgroundColor: Colors.primary},
   headerTitleStyle: {color: Colors.white},
 };
 
 const SingnUpStyle = {
+  tittle: 'Cadastrar-se',
   headerLeaft: false,
   headerStyle: {backgroundColor: Colors.primary},
   headerTitleStyle: {color: Colors.white},
