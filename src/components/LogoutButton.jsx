@@ -31,7 +31,7 @@ const LogoutButton = props => {
 export default LogoutButton;
 
 const ButtonExit = styled.TouchableHighlight`
-  width: 50px;
+  width: 45px;
   height: 50px;
   align-items: center;
   justify-content: center;

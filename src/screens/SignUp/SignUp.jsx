@@ -39,7 +39,7 @@ const SignUp = ({navigation}) => {
                 );
                 navigation.reset({
                   index: 0,
-                  routes: [{name: 'Login'}],
+                  routes: [{name: 'SignIn'}],
                 });
               });
             })
@@ -50,7 +50,7 @@ const SignUp = ({navigation}) => {
           navigation.dispatch(
             CommonActions.reset({
               index: 0,
-              routes: [{name: 'Login'}],
+              routes: [{name: 'SignIn'}],
             }),
           );
         })
@@ -79,7 +79,7 @@ const SignUp = ({navigation}) => {
     navigation.dispatch(
       CommonActions.reset({
         index: 0,
-        routes: [{name: 'Login'}],
+        routes: [{name: 'SignIn'}],
       }),
     );
   };

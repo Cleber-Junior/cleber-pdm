@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   SafeAreaView,
@@ -23,7 +23,7 @@ const SignIn = ({navigation}) => {
   const [pass, setPass] = useState('');
 
   const recuperaSenha = () => {
-    navigation.navigate('Recuperar senhas');
+    navigation.navigate('ForgotPass');
   };
 
   const storageUserCache = async value => {
@@ -31,6 +31,13 @@ const SignIn = ({navigation}) => {
       value.pass = pass;
       const jsonValue = JSON.stringify(value);
       await AsyncStorage.setItem('user', jsonValue);
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{name: 'Home'}],
+        }),
+      );
+      console.log(jsonValue);
     } catch (e) {
       console.log('SignIn: Erro em getUser: ' + e);
     }
@@ -54,7 +61,7 @@ const SignIn = ({navigation}) => {
     navigation.dispatch(
       CommonActions.reset({
         index: 0,
-        routes: [{name: 'Cadastrar-se'}],
+        routes: [{name: 'SignUp'}],
       }),
     );
   };
@@ -64,12 +71,10 @@ const SignIn = ({navigation}) => {
       auth()
         .signInWithEmailAndPassword(email, pass)
         .then(() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [{name: 'Home'}],
-            }),
-          );
+          if (!auth().currentUser.emailVerified) {
+            Alert.alert('Erro', 'Email não verificado');
+          }
+          getUser();
         })
         .catch(e => {
           console.log('SignIn ' + e);
@@ -81,7 +86,7 @@ const SignIn = ({navigation}) => {
               break;
           }
         });
-      console.log(email, pass);
+      // console.log(email, pass);
     } else {
       Alert.alert('Erro', 'Preencha todos os campos');
       return;
