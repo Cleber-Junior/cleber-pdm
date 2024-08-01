@@ -7,8 +7,8 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
-import MyButton from '../components/MyButton';
-import {Colors} from '../assets/images/colors';
+import MyButton from '../../components/MyButton';
+import {Colors} from '../../assets/images/colors';
 import auth from '@react-native-firebase/auth';
 import {color} from '@rneui/base';
 

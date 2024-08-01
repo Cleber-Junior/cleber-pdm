@@ -10,8 +10,8 @@ import {
   Alert,
 } from 'react-native';
 import {CommonActions} from '@react-navigation/native';
-import MyButton from '../components/MyButton';
-import {Colors} from '../assets/images/colors';
+import MyButton from '../../components/MyButton';
+import {Colors} from '../../assets/images/colors';
 import app from '@react-native-firebase/app';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
@@ -99,7 +99,7 @@ const SignIn = ({navigation}) => {
         <View style={styles.divSuperior}>
           <Image
             style={styles.LogoFullName}
-            source={require('../assets/images/LogoLigth.png')}
+            source={require('../../assets/images/LogoLigth.png')}
             accessibilityLabel="Logo do App"
           />
           <TextInput

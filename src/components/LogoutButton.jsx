@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import styled from 'styled-components/native';
 import auth from '@react-native-firebase/auth';
 import RNRestart from 'react-native-restart';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const LogoutButton = props => {
   const signOut = () => {
@@ -23,7 +24,7 @@ const LogoutButton = props => {
   };
   return (
     <ButtonExit onPress={signOut} underlayColor="transparent">
-      <Image source={require('../assets/icons/logout.png')} />
+      <Icon name="logout" size={30} color="#fff" />
     </ButtonExit>
   );
 };
