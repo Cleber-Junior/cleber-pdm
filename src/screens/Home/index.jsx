@@ -3,6 +3,7 @@ import LogoutButton from '../../components/LogoutButton';
 import {Container, Header, Projetos, Text} from './styles';
 import Item from './Item';
 import {ProjetoContext} from '../../Context/ProjetoProviders';
+import FloatButton from '../../components/FloatButton';
 
 export default Home = ({navigation}) => {
   const {projects} = useContext(ProjetoContext);
@@ -17,8 +18,8 @@ export default Home = ({navigation}) => {
     );
   };
 
-  const routeUser = value => {
-    navigation.navigate('Projeto', {value});
+  const routeProject = value => {
+    navigation.navigate('EditProject', {value});
   };
 
   return (
@@ -30,10 +31,11 @@ export default Home = ({navigation}) => {
       <Projetos
         data={projects}
         renderItem={({item}) => (
-          <Item item={item} onPress={() => routeUser(item)} />
+          <Item item={item} onPress={() => routeProject(item)} />
         )}
         keyExtractor={item => item.id}
       />
+      <FloatButton onClick={() => routeProject(null)} />
     </Container>
   );
 };

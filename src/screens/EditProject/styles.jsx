@@ -8,7 +8,7 @@ export const Container = styled.SafeAreaView`
 
 export const Header = styled.View`
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-above;
   align-items: center;
   background-color: ${Colors.primary};
   padding: 10px;
@@ -19,8 +19,27 @@ export const Projetos = styled.FlatList`
   height: 100%;
 `;
 
-export const Text = styled.Text`
-  font-size: 24px;
+export const Title = styled.Text`
+  font-size: 20px;
   margin-left: 10px;
   color: ${Colors.white};
+`;
+
+export const Text = styled.Text`
+  font-size: 20px;
+  margin-left: 10px;
+  color: ${Colors.white};
+`;
+
+export const Form = styled.View`
+  margin: 10px;
+`;
+
+const TextDescription = styled.TextInput`
+  font-size: 16px;
+  color: ${Colors.white};
+  background-color: ${Colors.grey};
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
 `;

@@ -17,6 +17,7 @@ export const Header = styled.View`
 export const Projetos = styled.FlatList`
   width: 95%;
   height: 100%;
+  margin: auto;
 `;
 
 export const Text = styled.Text`

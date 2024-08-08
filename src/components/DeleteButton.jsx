@@ -10,7 +10,7 @@ const MyButton = props => {
   );
 };
 
-export default MyButton; 
+export default MyButton;
 
 const styles = StyleSheet.create({
   texto: {
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   button: {
-    backgroundColor: Colors.primary,
+    backgroundColor: Colors.red,
     textAlign: 'center',
     padding: 10,
     margin: 10,

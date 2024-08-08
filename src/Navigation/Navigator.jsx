@@ -8,6 +8,7 @@ import Preload from '../screens/Preload/Index';
 import {StatusBar} from 'react-native';
 import {Colors} from '../assets/images/colors';
 import ForgotPass from '../screens/ForgotPass/ForgotPass';
+import EditProject from '../screens/EditProject';
 import {Header} from '@rneui/base';
 
 const Stack = createNativeStackNavigator();
@@ -34,6 +35,7 @@ const Navigator = () => {
           component={ForgotPass}
           options={forgotPass}
         />
+        <Stack.Screen name="EditProject" component={EditProject} />
       </Stack.Navigator>
     </NavigationContainer>
   );
