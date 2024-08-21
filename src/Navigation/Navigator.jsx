@@ -1,7 +1,8 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Home from '../screens/Home/index';
+import Home from '../screens/Home/Index';
+import UserProfile from '../screens/UserProfile/Index';
 import SignIn from '../screens/SignIn/SignIn';
 import SignUp from '../screens/SignUp/Index';
 import Preload from '../screens/Preload/Index';
@@ -9,7 +10,6 @@ import {StatusBar} from 'react-native';
 import {Colors} from '../assets/images/colors';
 import ForgotPass from '../screens/ForgotPass/ForgotPass';
 import EditProject from '../screens/EditProject';
-import {Header} from '@rneui/base';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +36,11 @@ const Navigator = () => {
           options={forgotPass}
         />
         <Stack.Screen name="EditProject" component={EditProject} />
+        <Stack.Screen
+          name="UserProfile"
+          component={UserProfile}
+          options={HomeStyle}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -30,8 +30,41 @@ export const ProjetoProvider = ({children}) => {
     };
   }, []);
 
+  const save = async (id, title, metavalue, description) => {
+    try {
+      if (id) {
+        await firestore().collection('projetos').doc(id).update({
+          nome: title,
+          valorMeta: metavalue,
+          desc: description,
+        });
+      } else {
+        await firestore().collection('projetos').add({
+          nome: title,
+          valorMeta: metavalue,
+          desc: description,
+          valorAtual: 0,
+        });
+      }
+      return true;
+    } catch (e) {
+      console.log('Projeto salvo' + e);
+      return false;
+    }
+  };
+
+  const del = async id => {
+    try {
+      await firestore().collection('projetos').doc(id).delete();
+      return true;
+    } catch (e) {
+      console.log('Projeto deletado' + e);
+      return false;
+    }
+  };
+
   return (
-    <ProjetoContext.Provider value={{projects}}>
+    <ProjetoContext.Provider value={{projects, save, del}}>
       {children}
     </ProjetoContext.Provider>
   );

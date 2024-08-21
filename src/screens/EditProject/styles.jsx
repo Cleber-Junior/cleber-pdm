@@ -26,7 +26,7 @@ export const Title = styled.Text`
 `;
 
 export const Text = styled.Text`
-  font-size: 20px;
+  font-size: 12px;
   margin-left: 10px;
   color: ${Colors.white};
 `;
@@ -35,11 +35,10 @@ export const Form = styled.View`
   margin: 10px;
 `;
 
-const TextDescription = styled.TextInput`
+export const TextDescription = styled.TextInput`
   font-size: 16px;
   color: ${Colors.white};
   background-color: ${Colors.grey};
   border-radius: 10px;
   padding: 10px;
-  margin-top: 10px;
 `;

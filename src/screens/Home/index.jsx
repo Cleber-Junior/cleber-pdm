@@ -1,13 +1,33 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import LogoutButton from '../../components/LogoutButton';
-import {Container, Header, Projetos, Text} from './styles';
+import ProfileButton from '../../components/ProfileButton';
+import FloatButton from '../../components/FloatButton';
+import {Container, Header, Projetos} from './styles';
 import Item from './Item';
 import {ProjetoContext} from '../../Context/ProjetoProviders';
-import FloatButton from '../../components/FloatButton';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import {CommonActions} from '@react-navigation/native';
 
 export default Home = ({navigation}) => {
   const {projects} = useContext(ProjetoContext);
-  const [projetoTemp, setProjetoTemp] = useState([]);
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    const fetchUserName = async () => {
+      const user = auth().currentUser;
+      if (user) {
+        const userDoc = await firestore()
+          .collection('users')
+          .doc(user.uid)
+          .get();
+        if (userDoc.exists) {
+          setUserName(userDoc.data().name);
+        }
+      }
+    };
+    fetchUserName();
+  }, []);
 
   const logOutUser = () => {
     navigation.dispatch(
@@ -22,10 +42,14 @@ export default Home = ({navigation}) => {
     navigation.navigate('EditProject', {value});
   };
 
+  const profileUSer = () => {
+    navigation.navigate('UserProfile');
+  };
+
   return (
     <Container>
       <Header>
-        <Text>Home</Text>
+        <ProfileButton onClick={() => profileUSer()} userName={userName} />
         <LogoutButton logout={logOutUser} />
       </Header>
       <Projetos
