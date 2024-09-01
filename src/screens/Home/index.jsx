@@ -38,8 +38,12 @@ export default Home = ({navigation}) => {
     );
   };
 
-  const routeProject = value => {
-    navigation.navigate('EditProject', {value});
+  // const routeProject = value => {
+  //   navigation.navigate('EditProject', {value});
+  // };
+
+  const routeProject = item => {
+    navigation.navigate({name: 'EditProject', params: {projeto: item}});
   };
 
   const profileUSer = () => {

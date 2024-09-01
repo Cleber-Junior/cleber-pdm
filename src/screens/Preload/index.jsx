@@ -9,8 +9,8 @@ const Preload = ({navigation}) => {
   const getUserCache = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem('user');
-      console.log('getUserCache');
-      console.log(jsonValue);
+      //console.log('getUserCache');
+      //console.log(jsonValue);
       return jsonValue != null ? JSON.parse(jsonValue) : null;
     } catch (e) {
       console.log('Home: Erro em getUserCache ' + e);

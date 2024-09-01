@@ -37,7 +37,7 @@ const SignIn = ({navigation}) => {
           routes: [{name: 'Home'}],
         }),
       );
-      console.log(jsonValue);
+      //console.log(jsonValue);
     } catch (e) {
       console.log('SignIn: Erro em getUser: ' + e);
     }
